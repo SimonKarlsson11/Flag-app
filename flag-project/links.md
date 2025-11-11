@@ -1,0 +1,2 @@
+- [Github repository](https://github.com/SimonKarlsson11/Flag-app)
+- [Deployat projekt](https://astonishing-valkyrie-552888.netlify.app/)
