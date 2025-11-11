@@ -64,7 +64,7 @@ header {
   height: 44px;
   padding: 10px 16px;
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   color: var(--text, #000000);
   font-size: 14px;
   font-weight: 300;
@@ -85,7 +85,7 @@ header {
   height: 44px;
   padding: 10px 12px;
   border: 0;
-  border-radius: 3px;
+  border-radius: 5px;
   background: #fff;
   color: #111;
   font-size: 14px;
@@ -210,7 +210,7 @@ header {
   color: #2b3844;
   background-color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   text-decoration: none;
@@ -230,7 +230,6 @@ header {
   max-width: 480px;            
   aspect-ratio: 4 / 3;
   background: #eee;
-  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,.08);
   place-self: start;           
@@ -284,7 +283,7 @@ header {
   padding: 6px 16px;
   background: #fff;
   color: #2b3844;
-  border-radius: 6px;
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,.05);
   text-decoration: none;
   font-size: 14px;
@@ -301,6 +300,41 @@ header {
 }
 
 @media (max-width: 600px) {
+
   .country-page { padding: 24px; }
   .info h1 { font-size: 28px; }
+
+  header { padding: 0 16px; }
+
+  .navbar {
+    min-height: 60px;
+    gap: 12px;
+  }
+
+  .flag-text {       
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .techover-logo-dark {    
+    height: 15px;
+  }
+
+  .dark-toggle {
+    gap: 6px;
+  }
+  .dark-text {             
+    font-size: 12px;
+  }
+
+
+  .navbar { flex-wrap: nowrap; }
+
+  .country-card .flag { aspect-ratio: 16 / 10; } 
+
+  .country-card .meta { padding: 14px; }
+  .country-card .title { font-size: 16px; margin-bottom: 6px; }
+  .country-card p { font-size: 13px; margin: 4px 0; }
+
 }

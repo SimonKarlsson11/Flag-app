@@ -15,7 +15,7 @@ export default function RegionFilter({ value, onChange }) {
             value={value || ""} 
             onChange = {handleChange}
         >
-            <option value="">All Regions</option>
+            <option value="">Filter by Regions</option>
 
             {regions.map((r) => (
                 <option key={r} value={r}>
