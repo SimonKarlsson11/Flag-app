@@ -1,7 +1,26 @@
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData, Link, useNavigation } from "react-router-dom";
 
 export default function CountryPage() {
   const { country, neighbors } = useLoaderData();
+  const navigation = useNavigation();
+  const loading = navigation.state === "loading";
+
+  if (loading) {
+    return (
+      <div className="country-page">
+        <Link className="back-btn" to="/">Back</Link>
+        <div className="country-layout">
+          <div className="flag shimmer" />
+          <div className="info">
+            <div className="shimmer line xl" />
+            <div className="shimmer line" />
+            <div className="shimmer line" />
+            <div className="shimmer line" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="country-page">
@@ -9,7 +28,10 @@ export default function CountryPage() {
 
       <div className="country-layout">
         <div className="flag">
-          <img src={country.flags.svg || country.flags.png} alt={`${country.name.common} flag`} />
+          <img
+            src={country.flags.svg || country.flags.png}
+            alt={`${country.name.common} flag`}
+          />
         </div>
 
         <div className="info">
@@ -30,12 +52,16 @@ export default function CountryPage() {
             <strong>Border Countries:</strong>
             <div className="chips">
               {neighbors.length
-                ? neighbors.map(n => (
-                    <Link key={n.cca3} className="chip" to={`/country/${encodeURIComponent(n.name.common)}`}>
+                ? neighbors.map((n) => (
+                    <Link
+                      key={n.cca3}
+                      className="chip"
+                      to={`/country/${encodeURIComponent(n.name.common)}`}
+                    >
                       {n.name.common}
                     </Link>
                   ))
-                : <span> Inga grannländer </span>}
+                : <span>Inga grannländer</span>}
             </div>
           </div>
         </div>
@@ -44,6 +70,7 @@ export default function CountryPage() {
   );
 }
 
+/* Hjälpare */
 function getNativeName(country) {
   const native = country.name?.nativeName;
   if (!native) return "—";
@@ -52,19 +79,23 @@ function getNativeName(country) {
 }
 function listCurrencies(currencies) {
   if (!currencies) return "—";
-  return Object.values(currencies).map(c => c.name).join(", ");
+  return Object.values(currencies).map((c) => c.name).join(", ");
 }
 function listLanguages(languages) {
   if (!languages) return "—";
   return Object.values(languages).join(", ");
 }
 
+/* Loader */
 export async function countryLoader({ params }) {
   const name = params.name;
   const BASE = "https://restcountries.com/v3.1";
-  const FIELDS = "name,flags,region,subregion,capital,population,tld,currencies,languages,borders,cca3";
+  const FIELDS =
+    "name,flags,region,subregion,capital,population,tld,currencies,languages,borders,cca3";
 
-  const res = await fetch(`${BASE}/name/${encodeURIComponent(name)}?fullText=true&fields=${FIELDS}`);
+  const res = await fetch(
+    `${BASE}/name/${encodeURIComponent(name)}?fullText=true&fields=${FIELDS}`
+  );
   if (res.status === 404) {
     throw new Response("Hittade inte landet", { status: 404 });
   }

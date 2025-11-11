@@ -1,24 +1,37 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import Controls from "../components/Controls";
 import CountriesGrid from "../components/CountriesGrid";
 
-
-
-
 const Home = () => {
   const countries = useLoaderData();
-  console.log("länder:", countries.length);
+  const navigation = useNavigation();
+  const loading = navigation.state === "loading";
 
+  return (
+    <div className="home-page">
+      <Controls />
 
-  return ( 
-  <div className="home-page"> 
-  <Controls /> 
-  <CountriesGrid countries={countries} />
-  </div> 
+      {loading ? (
+        <div className="countries-grid">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div className="country-card skeleton" key={i}>
+              <div className="flag" />
+              <div className="meta">
+                <div className="shimmer line lg" />
+                <div className="shimmer line" />
+                <div className="shimmer line" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <CountriesGrid countries={countries} />
+      )}
+    </div>
   );
-}
+};
 
-// pages/Home.jsx
+// loader
 export const homeLoader = async ({ request }) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q")?.trim();
@@ -37,15 +50,9 @@ export const homeLoader = async ({ request }) => {
   }
 
   const res = await fetch(endpoint, { signal: request.signal });
-
   if (res.status === 404) return [];
-
-  if (!res.ok) {
-    throw new Error("Det gick inte att hämta länderna");
-  }
-
+  if (!res.ok) throw new Error("Det gick inte att hämta länderna");
   return res.json();
 };
-
 
 export default Home;
