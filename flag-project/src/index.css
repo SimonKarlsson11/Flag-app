@@ -12,6 +12,7 @@ header {
   position: sticky;
   z-index: 1000;
   padding: 0px 80px;
+  background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -199,9 +200,29 @@ header {
 }
 
 .back-btn {
-  align-self: flex-start;          
+  max-width: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b3844;
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
   margin-bottom: 40px;
 }
+
+.back-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
 
 
 .flag {
@@ -247,7 +268,7 @@ header {
 .borders {
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: start;
+  align-items: center;
   gap: 12px;
 }
 .borders > strong {
